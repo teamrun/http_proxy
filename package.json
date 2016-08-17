@@ -1,0 +1,22 @@
+{
+  "name": "h-proxy",
+  "version": "0.0.1",
+  "description": "http proxy",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "proxy",
+    "http"
+  ],
+  "author": "teamrun",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^1.2.1",
+    "request": "^2.74.0"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1"
+  }
+}
