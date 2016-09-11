@@ -15,6 +15,9 @@
   "dependencies": {
     "es6-promisify": "^4.1.0",
     "koa": "^1.2.1",
+    "koa-better-body": "^2.0.1",
+    "koa-router": "^5.4.0",
+    "lodash": "^4.15.0",
     "request": "^2.74.0"
   },
   "devDependencies": {

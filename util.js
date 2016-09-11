@@ -24,7 +24,7 @@ function makeLocalCachePath(_url){
 
 function saveRemoteFile(fileUrl, savePath){
   return new Promise((resolve, reject) => {
-    console.log('save remote file:', fileUrl, savePath);
+    // console.log('save remote file:', fileUrl, savePath);
     let ws = fs.createWriteStream(savePath);
     let rs = request.get(fileUrl);
     rs.pipe(ws);
@@ -37,9 +37,9 @@ function saveRemoteFile(fileUrl, savePath){
 }
 
 let getFileWithCache = function*(fileUrl){
-  let _from;
+  let _from, rs;
   let expectPath = makeLocalCachePath(fileUrl);
-  console.log('expectPath', expectPath)
+  // console.log('expectPath', expectPath)
   // 本地是否有缓存文件
   let fileExists;
   try{
@@ -49,21 +49,20 @@ let getFileWithCache = function*(fileUrl){
   catch(err){
     fileExists = false;
   }
-  console.log('file exists:', fileExists);
+  // console.log('file exists:', fileExists);
   // 从本地读取
   if(fileExists){
     _from = 'cache';
-    // this.set('x-serve-from', 'local');
-    // this.set('content-type', mime.lookup(expectPath));
-
-    // this.body = fs.createReadStream(expectPath);
+    rs = fs.createReadStream(expectPath);
   }
   // 从 remtoe 读取
   else{
     _from = 'remote';
-    yield saveRemoteFile(fileUrl, expectPath);
+    rs = request.get(fileUrl);
+    rs.pipe(fs.createWriteStream(expectPath));
+    // yield saveRemoteFile(fileUrl, expectPath);
   }
-  return {path: expectPath, from: _from};
+  return {rs, path: expectPath, from: _from};
 }
 
 
