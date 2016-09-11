@@ -13,6 +13,7 @@
   "author": "teamrun",
   "license": "MIT",
   "dependencies": {
+    "es6-promisify": "^4.1.0",
     "koa": "^1.2.1",
     "request": "^2.74.0"
   },
